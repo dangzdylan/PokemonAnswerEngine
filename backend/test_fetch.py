@@ -1,20 +1,42 @@
 from app.utils.fetch_data import fetch_pokemon_data
 from app.services.embeddings import store_embeddings
 from app.services.search import search_embedding
+import requests
 
 if __name__ == "__main__":
-    # Example query
-    query = "What's that pokemon look like a Whale"
+    # Define the API endpoint
+    endpoint = "http://127.0.0.1:8000/query/"
 
-    # Perform the search
-    results = search_embedding(query)
+    # Define the user query
+    payload = {"user_query": "Tell me about Pikachu."}
 
-    # Print the top results
-    print("Top Results:")
-    for result in results:
-        print(f"Name: {result['name']}")
-        print(f"Details: {result['details']}")
-        print()
+    # Make a POST request to the /query endpoint
+    response = requests.post(endpoint, json=payload)
+
+    # Check if the request was successful
+    if response.status_code == 200:
+        data = response.json()
+        print("Query:", data["query"])
+        print("GPT Response:", data["response"])
+        print("Retrieved Data:", data["retrieved_data"])
+    else:
+        print("Error:", response.status_code, response.text)
+
+
+
+# if __name__ == "__main__":
+#     # Example query
+#     query = "What's that pokemon look like a Whale"
+
+#     # Perform the search
+#     results = search_embedding(query)
+
+#     # Print the top results
+#     print("Top Results:")
+#     for result in results:
+#         print(f"Name: {result['name']}")
+#         print(f"Details: {result['details']}")
+#         print()
 
 # if __name__ == "__main__":
 #     # Fetch Pokémon data
