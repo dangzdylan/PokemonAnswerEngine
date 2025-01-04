@@ -29,7 +29,7 @@ const PokemonQuery: React.FC = () => {
       {response && (
         <div>
           <h2 className="font-bold">Pokémon Professor :</h2>
-          <p>{response}</p>
+          <p className="text-left">{response}</p>
         </div>
       )}
 

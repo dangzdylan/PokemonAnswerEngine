@@ -18,11 +18,16 @@ def fetch_pokemon_data(limit=100):
     data = []
 
     for pokemon in response.json()["results"]:
-        # Fetch basic Pokémon details
-        details = requests.get(pokemon["url"]).json()
 
-        # Fetch species-specific details
-        species_details = requests.get(f"{species_url}/{details['id']}").json()
+        try :
+            # Fetch basic Pokémon details
+            details = requests.get(pokemon["url"]).json()
+
+            # Fetch species-specific details
+            species_details = requests.get(f"{species_url}/{details['id']}").json()
+        except Exception as e :
+            print('Species not found')
+            continue
 
         # Extract relevant data
         data.append({

@@ -3,24 +3,24 @@ from app.services.embeddings import store_embeddings
 from app.services.search import search_embedding
 import requests
 
-if __name__ == "__main__":
-    # Define the API endpoint
-    endpoint = "http://127.0.0.1:8000/query/"
+# if __name__ == "__main__":
+#     # Define the API endpoint
+#     endpoint = "http://127.0.0.1:8000/query/"
 
-    # Define the user query
-    payload = {"user_query": "Tell me about Pikachu."}
+#     # Define the user query
+#     payload = {"user_query": "Tell me about Pikachu."}
 
-    # Make a POST request to the /query endpoint
-    response = requests.post(endpoint, json=payload)
+#     # Make a POST request to the /query endpoint
+#     response = requests.post(endpoint, json=payload)
 
-    # Check if the request was successful
-    if response.status_code == 200:
-        data = response.json()
-        print("Query:", data["query"])
-        print("GPT Response:", data["response"])
-        print("Retrieved Data:", data["retrieved_data"])
-    else:
-        print("Error:", response.status_code, response.text)
+#     # Check if the request was successful
+#     if response.status_code == 200:
+#         data = response.json()
+#         print("Query:", data["query"])
+#         print("GPT Response:", data["response"])
+#         print("Retrieved Data:", data["retrieved_data"])
+#     else:
+#         print("Error:", response.status_code, response.text)
 
 
 
@@ -38,12 +38,12 @@ if __name__ == "__main__":
 #         print(f"Details: {result['details']}")
 #         print()
 
-# if __name__ == "__main__":
-#     # Fetch Pokémon data
-#     data = fetch_pokemon_data(limit=100)  # Fetch 10 Pokémon for testing
+if __name__ == "__main__":
+    # Fetch Pokémon data
+    data = fetch_pokemon_data(limit=1300)  # Fetch 10 Pokémon for testing
 
-#     # Store embeddings for the fetched data
-#     store_embeddings(data)
+    # Store embeddings for the fetched data
+    store_embeddings(data)
 
 
 # if __name__ == "__main__":
