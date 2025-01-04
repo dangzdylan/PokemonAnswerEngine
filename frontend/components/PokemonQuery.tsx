@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { fetchPokemonData, RetrievedData } from "@/utils/api";
+import { HiMiniChatBubbleBottomCenterText } from "react-icons/hi2";
 
 const PokemonQuery: React.FC = () => {
   const [query, setQuery] = useState("");
@@ -23,27 +24,18 @@ const PokemonQuery: React.FC = () => {
 
   return (
     <div>
-      <h1>Pokémon Query</h1>
-      <input
-        type="text"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder="Enter your query"
-      />
-      <button onClick={handleQuery}>Search</button>
-
       {error && <p style={{ color: "red" }}>{error}</p>}
 
       {response && (
         <div>
-          <h2>GPT Response</h2>
+          <h2 className="font-bold">Pokémon Professor :</h2>
           <p>{response}</p>
         </div>
       )}
 
       {retrievedData.length > 0 && (
         <div>
-          <h2>Retrieved Pokémon</h2>
+          <h2 className="font-bold mt-5">Pokémon that may be relevant to your query :</h2>
           {retrievedData.map((pokemon) => (
             <div key={pokemon.id}>
               <h3>{pokemon.details.name}</h3>
@@ -61,6 +53,24 @@ const PokemonQuery: React.FC = () => {
           ))}
         </div>
       )}
+
+    <textarea
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Enter your question"
+        className="py-4 px-4 w-3/4 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+        rows={1}
+        style={{ overflow: "hidden" }}
+        onInput={(e) => {
+            const target = e.target as HTMLTextAreaElement;
+            target.style.height = "auto"; // Reset height
+            target.style.height = `${target.scrollHeight}px`; // Adjust height to content
+        }}
+        ></textarea>
+
+      <button onClick={handleQuery} className="ml-2 py-2 px-4 border-black border-2 rounded-2xl hover:bg-slate-200">
+         <HiMiniChatBubbleBottomCenterText/>
+      </button>
     </div>
   );
 };
