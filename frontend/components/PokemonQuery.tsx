@@ -10,6 +10,7 @@ const PokemonQuery: React.FC = () => {
   const [response, setResponse] = useState<string>("");
   const [retrievedData, setRetrievedData] = useState<RetrievedData[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [showPokemonCards, setShowPokemonCards] = useState(true);
 
   const handleQuery = async () => {
     try {
@@ -41,36 +42,48 @@ const PokemonQuery: React.FC = () => {
 
       {retrievedData.length > 0 && (
         <div>
-          <h2 className="font-bold mt-5">Pokémon that may be relevant to your query :</h2>
-          <div className="flex flex-row">
-            {retrievedData.map((pokemon) => (
-              <div key={pokemon.id} className={` m-2 pokemon-card p-4 rounded-lg shadow-md pokemon-card-${pokemon.details.types[0]}`}>
-                <h3 className="font-bold my-1">{capitalize(pokemon.details.name)}</h3>
-                <p>
-                  <strong>Height:</strong> {pokemon.details.height} |{" "}
-                  <strong>Weight:</strong> {pokemon.details.weight}
-                </p>
-                <p>
-                  <strong>Abilities:</strong> {pokemon.details.abilities.map(capitalize).join(", ")}
-                </p>
-                <p>
-                  <strong>Flavor Text:</strong> {pokemon.details.flavor_text}
-                </p>
-                <button 
-                className="my-2 bg-white/30 backdrop-blur-md text-white font-semibold py-1 px-2 rounded-lg border border-white/50 hover:bg-white/50 hover:text-black transition ease-in-out duration-300"
-                onClick={() => {
-                  setQuery(`Tell me everything you know about ${capitalize(pokemon.details.name)}!`);
-                  setTimeout(() => {
-                    handleQuery(); // Trigger the query after the state is updated
-                  }, 0);
-                }}
+          <button
+            onClick={() => setShowPokemonCards(!showPokemonCards)}
+            className="my-5 font-bold mt-5 py-2 px-4 bg-stone-900 text-white rounded-lg hover:bg-stone-700 transition ease-in-out duration-300"
+          >
+            {showPokemonCards
+              ? "Hide Pokémon that may be relevant to your query"
+              : "Show Pokémon that may be relevant to your query"}
+          </button>
+          {showPokemonCards &&
+            <div className="flex flex-row">
+              {retrievedData.map((pokemon) => (
+                <div key={pokemon.id} className={`flex-1 m-2 pokemon-card p-4 rounded-lg shadow-md pokemon-card-${pokemon.details.types[0]}`}>
+                  <div className="flex justify-center">
+                    <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}/>
+                  </div>
+                  <h3 className="font-bold my-1">{capitalize(pokemon.details.name)}</h3>
+                  <p>
+                    <strong>Height:</strong> {pokemon.details.height} |{" "}
+                    <strong>Weight:</strong> {pokemon.details.weight}
+                  </p>
+                  <p>
+                    <strong>Abilities:</strong> {pokemon.details.abilities.map(capitalize).join(", ")}
+                  </p>
+                  <p>
+                    <strong>Flavor Text:</strong> {pokemon.details.flavor_text}
+                  </p>
+                  <button 
+                  className="my-2 bg-white/30 backdrop-blur-md text-white font-semibold py-1 px-2 rounded-lg border border-white/50 hover:bg-white/50 hover:text-black transition ease-in-out duration-300"
+                  onClick={() => {
+                    setQuery(`Tell me everything you know about ${capitalize(pokemon.details.name)}!`);
+                    setTimeout(() => {
+                      handleQuery(); // Trigger the query after the state is updated
+                    }, 0);
+                  }}
 
-                >
-                  Learn More!
-                </button>
-              </div>
-            ))}
-          </div>
+                  >
+                    Learn More!
+                  </button>
+                </div>
+              ))}
+            </div>
+            }
         </div>
       )}
 
