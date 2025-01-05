@@ -17,7 +17,9 @@ const Home = () => {
       </header>
 
       <main className="container mx-auto p-6 text-black text-center">
-        <PokemonQuery />
+        <div className="px-20">
+          <PokemonQuery />
+        </div>
       </main>
 
       <footer className="bg-gray-800 text-white py-4 mt-auto text-center">

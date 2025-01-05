@@ -45,16 +45,16 @@ const PokemonQuery: React.FC = () => {
       {error && <p style={{ color: "red" }}>{error}</p>}
 
       {submittedQuery && (
-        <div className="my-5">
-          <h2 className="font-bold">User:</h2> 
-          {`${submittedQuery}`}
+        <div className="my-5 text-left">
+          <h2 className="font-bold mx-2">{"You:"}</h2> 
+          <div className="mx-2"> {`${submittedQuery}`} </div>
         </div>
       )}
 
       {response && (
         <div>
-          <h2 className="font-bold">Pokémon Professor :</h2>
-          <p className="text-left">{response}</p>
+          <h2 className="font-bold text-left mx-2">Pokémon Professor :</h2>
+          <p className="text-left mx-2">{response}</p>
         </div>
       )}
 
