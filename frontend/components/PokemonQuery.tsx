@@ -8,12 +8,14 @@ import "./PokemonQuery.css";
 const PokemonQuery: React.FC = () => {
   const [query, setQuery] = useState("");
   const [response, setResponse] = useState<string>("");
+  const [submittedQuery, setSubmittedQuery] = useState<string>("");
   const [retrievedData, setRetrievedData] = useState<RetrievedData[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [showPokemonCards, setShowPokemonCards] = useState(true);
 
   const handleQuery = async () => {
     try {
+      setSubmittedQuery(query);
       const data = await fetchPokemonData(query);
       setResponse(data.response);
       setRetrievedData(data.retrieved_data);
@@ -32,6 +34,13 @@ const PokemonQuery: React.FC = () => {
   return (
     <div>
       {error && <p style={{ color: "red" }}>{error}</p>}
+
+      {submittedQuery && (
+        <div className="my-5">
+          <h2 className="font-bold">User:</h2> 
+          {`${submittedQuery}`}
+        </div>
+      )}
 
       {response && (
         <div>
