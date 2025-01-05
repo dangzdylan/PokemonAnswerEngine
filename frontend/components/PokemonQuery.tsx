@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { fetchPokemonData, RetrievedData } from "@/utils/api";
 import { HiMiniChatBubbleBottomCenterText } from "react-icons/hi2";
+import "./PokemonQuery.css";
 
 const PokemonQuery: React.FC = () => {
   const [query, setQuery] = useState("");
@@ -22,6 +23,11 @@ const PokemonQuery: React.FC = () => {
     }
   };
 
+  function capitalize(word: string) {
+    if (!word) return word;
+    return word[0].toUpperCase() + word.substr(1).toLowerCase();
+  }
+
   return (
     <div>
       {error && <p style={{ color: "red" }}>{error}</p>}
@@ -36,23 +42,38 @@ const PokemonQuery: React.FC = () => {
       {retrievedData.length > 0 && (
         <div>
           <h2 className="font-bold mt-5">Pokémon that may be relevant to your query :</h2>
-          {retrievedData.map((pokemon) => (
-            <div key={pokemon.id}>
-              <h3>{pokemon.details.name}</h3>
-              <p>
-                <strong>Height:</strong> {pokemon.details.height} |{" "}
-                <strong>Weight:</strong> {pokemon.details.weight}
-              </p>
-              <p>
-                <strong>Abilities:</strong> {pokemon.details.abilities.join(", ")}
-              </p>
-              <p>
-                <strong>Flavor Text:</strong> {pokemon.details.flavor_text}
-              </p>
-            </div>
-          ))}
+          <div className="flex flex-row">
+            {retrievedData.map((pokemon) => (
+              <div key={pokemon.id} className={` m-2 pokemon-card p-4 rounded-lg shadow-md pokemon-card-${pokemon.details.types[0]}`}>
+                <h3 className="font-bold my-1">{capitalize(pokemon.details.name)}</h3>
+                <p>
+                  <strong>Height:</strong> {pokemon.details.height} |{" "}
+                  <strong>Weight:</strong> {pokemon.details.weight}
+                </p>
+                <p>
+                  <strong>Abilities:</strong> {pokemon.details.abilities.map(capitalize).join(", ")}
+                </p>
+                <p>
+                  <strong>Flavor Text:</strong> {pokemon.details.flavor_text}
+                </p>
+                <button 
+                className="my-2 bg-white/30 backdrop-blur-md text-white font-semibold py-1 px-2 rounded-lg border border-white/50 hover:bg-white/50 hover:text-black transition ease-in-out duration-300"
+                onClick={() => {
+                  setQuery(`Tell me everything you know about ${capitalize(pokemon.details.name)}!`);
+                  setTimeout(() => {
+                    handleQuery(); // Trigger the query after the state is updated
+                  }, 0);
+                }}
+
+                >
+                  Learn More!
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       )}
+
 
     <textarea
         value={query}
