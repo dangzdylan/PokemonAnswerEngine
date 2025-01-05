@@ -11,12 +11,13 @@ const PokemonQuery: React.FC = () => {
   const [submittedQuery, setSubmittedQuery] = useState<string>("");
   const [retrievedData, setRetrievedData] = useState<RetrievedData[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [showPokemonCards, setShowPokemonCards] = useState(true);
+  const [showPokemonCards, setShowPokemonCards] = useState(false);
 
-  const handleQuery = async () => {
+  const handleQuery = async (customQuery?: string) => {
+    const activeQuery = customQuery || query;
     try {
-      setSubmittedQuery(query);
-      const data = await fetchPokemonData(query);
+      setSubmittedQuery(activeQuery);
+      const data = await fetchPokemonData(activeQuery);
       setResponse(data.response);
       setRetrievedData(data.retrieved_data);
       setError(null);
@@ -29,6 +30,14 @@ const PokemonQuery: React.FC = () => {
   function capitalize(word: string) {
     if (!word) return word;
     return word[0].toUpperCase() + word.substr(1).toLowerCase();
+  }
+
+  function properSentenceCapitalization(sentence: string) {
+    let newSentence = "";
+    for (const word of sentence.split(" ")) {
+      newSentence += word[0] + word.slice(1).toLowerCase() + " ";
+    }
+    return newSentence;
   }
 
   return (
@@ -75,15 +84,14 @@ const PokemonQuery: React.FC = () => {
                     <strong>Abilities:</strong> {pokemon.details.abilities.map(capitalize).join(", ")}
                   </p>
                   <p>
-                    <strong>Flavor Text:</strong> {pokemon.details.flavor_text}
+                    <strong>Flavor Text:</strong> {properSentenceCapitalization(pokemon.details.flavor_text)}
                   </p>
                   <button 
                   className="my-2 bg-white/30 backdrop-blur-md text-white font-semibold py-1 px-2 rounded-lg border border-white/50 hover:bg-white/50 hover:text-black transition ease-in-out duration-300"
                   onClick={() => {
-                    setQuery(`Tell me everything you know about ${capitalize(pokemon.details.name)}!`);
-                    setTimeout(() => {
-                      handleQuery(); // Trigger the query after the state is updated
-                    }, 0);
+                    const newQuery = `Tell me everything you know about ${capitalize(pokemon.details.name)}!`;
+                    setQuery(newQuery);
+                    handleQuery(newQuery);
                   }}
 
                   >
@@ -111,7 +119,7 @@ const PokemonQuery: React.FC = () => {
         }}
         ></textarea>
 
-      <button onClick={handleQuery} className="ml-2 py-2 px-4 border-black border-2 rounded-2xl hover:bg-slate-200">
+      <button onClick={() => {handleQuery();}} className="ml-2 py-2 px-4 border-black border-2 rounded-2xl hover:bg-slate-200">
          <HiMiniChatBubbleBottomCenterText/>
       </button>
     </div>
