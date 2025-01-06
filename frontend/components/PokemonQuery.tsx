@@ -109,8 +109,8 @@ const PokemonQuery: React.FC = () => {
                           {capitalize(pokemon.details.name)}
                         </h3>
                         <p>
-                          <strong>Height:</strong> {pokemon.details.height} |{" "}
-                          <strong>Weight:</strong> {pokemon.details.weight}
+                          <strong>Height:</strong> {`${pokemon.details.height / 10} m`} |{" "}
+                          <strong>Weight:</strong> {`${pokemon.details.weight / 10} kg`}
                         </p>
                         <p>
                           <strong>Abilities:</strong>{" "}
