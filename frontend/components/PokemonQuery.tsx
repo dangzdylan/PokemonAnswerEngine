@@ -46,7 +46,7 @@ const PokemonQuery: React.FC = () => {
   function properSentenceCapitalization(sentence: string) {
     return sentence
       .split(" ")
-      .map((word) => word[0].toUpperCase() + word.slice(1).toLowerCase())
+      .map((word) => word[0] + word.slice(1).toLowerCase())
       .join(" ");
   }
 
