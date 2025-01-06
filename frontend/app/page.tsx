@@ -28,11 +28,6 @@ const Home = () => {
       <main className=" flex-grow flex flex-col overflow-y-auto px-20 py-10 text-black">
         <PokemonQuery />
       </main>
-
-      {/* Footer */}
-      <footer className="bg-gray-800 text-white py-4 text-center">
-        <p className="text-sm">Created by Dylan Dang</p>
-      </footer>
     </div>
   );
 };
