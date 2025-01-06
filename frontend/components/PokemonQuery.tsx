@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { fetchPokemonData, RetrievedData } from "@/utils/api";
 import { HiMiniChatBubbleBottomCenterText } from "react-icons/hi2";
 import "./PokemonQuery.css";
+import Image from "next/image";
 
 interface ChatMessage {
   query: string;
@@ -72,22 +73,67 @@ const PokemonQuery: React.FC = () => {
         ref={chatContainerRef}
         className="flex-grow overflow-y-auto border border-gray-300 rounded-lg p-4 mb-4"
       >
+        {/* Starting text */}
+        <div className="text-left mt-2 flex flex-row">
+              <div 
+                className="mr-5 flex-shrink-0" 
+                style={{ width: '40px', height: '40px' }}
+              >
+                <Image 
+                  src="/poke-professor-pfp.png"
+                  width={100}
+                  height={100}
+                  alt=""
+                />
+              </div>
+              <div>
+                <h2 className="font-bold text-red-500">Pokémon Professor:</h2>
+                <p>Greetings, I am the Pokémon Professor! Feel free to inquire about anything related to Pokémon—I am here to share my expertise and guide you on your journey!</p>
+              </div>
+            </div>
+          
         {history.map((message, index) => (
           <div key={index} className="mb-6">
-            <div className="text-left">
-              <h2 className="font-bold text-blue-500">You:</h2>
-              <p>{message.query}</p>
+            <div className="text-left mt-2 flex flex-row">
+              <div 
+                className="mr-5 flex-shrink-0" 
+                style={{ width: '40px', height: '40px' }}
+              >
+                <Image 
+                  src="/poke-trainer-pfp.png"
+                  width={100}
+                  height={100}
+                  alt=""
+                />
+              </div>
+              <div>
+                <h2 className="font-bold text-black">You:</h2>
+                <p>{message.query}</p>
+              </div>
             </div>
   
-            <div className="text-left mt-2">
-              <h2 className="font-bold text-green-600">Pokémon Professor:</h2>
-              <p>{message.response}</p>
+            <div className="text-left mt-2 flex flex-row">
+              <div 
+                className="mr-5 flex-shrink-0" 
+                style={{ width: '40px', height: '40px' }}
+              >
+                <Image 
+                  src="/poke-professor-pfp.png"
+                  width={100}
+                  height={100}
+                  alt=""
+                />
+              </div>
+              <div>
+                <h2 className="font-bold text-red-500">Pokémon Professor:</h2>
+                <p>{message.response}</p>
+              </div>
             </div>
   
             {message.retrievedData.length > 0 && (
               <div className="mt-4">
                 <button
-                  className="font-bold py-2 px-4 bg-stone-900 text-white rounded-lg hover:bg-stone-700 transition ease-in-out duration-300"
+                  className="font-bold py-2 px-4 bg-red-700 text-white rounded-lg hover:bg-red-400 transition ease-in-out duration-300"
                   onClick={() => toggleShowCards(index)}
                 >
                   {message.showCards ? "Hide Pokémon Data" : "Show Pokémon Data"}
@@ -155,7 +201,7 @@ const PokemonQuery: React.FC = () => {
         <textarea
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Enter your question"
+          placeholder="Enter your questions here!"
           className="flex-grow py-4 px-4 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
           rows={1}
           style={{ overflow: "hidden" }}

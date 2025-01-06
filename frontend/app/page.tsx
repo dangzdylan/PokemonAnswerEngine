@@ -1,5 +1,6 @@
 import Head from "next/head";
 import PokemonQuery from "@/components/PokemonQuery";
+import Image from "next/image";
 
 const Home = () => {
   return (
@@ -12,9 +13,15 @@ const Home = () => {
       </Head>
 
       {/* Header */}
-      <header className="bg-black text-white py-4 shadow-md text-center">
-        <h1 className="text-3xl font-bold">AI Pokémon Professor</h1>
-        <p className="text-sm mt-1">Ask me anything about Pokémon!</p>
+      <header className="bg-red-500 text-white py-2 shadow-md text-left">
+        <div style={{ width: '20vw', height: '5vh', position: 'relative' }}>
+          <Image 
+          src="/ai_pokemon_professor_title.png"
+          fill
+          style={{ objectFit: 'contain' }}
+           alt="AI Pokémon Professor"/>
+        </div>
+        <p className="text-sm mt-1 ml-2 font-bold">Ask me anything about Pokémon!</p>
       </header>
 
       {/* Main Content */}
@@ -24,7 +31,7 @@ const Home = () => {
 
       {/* Footer */}
       <footer className="bg-gray-800 text-white py-4 text-center">
-        <p className="text-sm">Created by Dylan Dang - Pokémon Professor © 2025</p>
+        <p className="text-sm">Created by Dylan Dang</p>
       </footer>
     </div>
   );
