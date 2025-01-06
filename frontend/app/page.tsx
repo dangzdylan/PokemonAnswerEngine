@@ -21,7 +21,7 @@ const Home = () => {
           style={{ objectFit: 'contain' }}
            alt="AI Pokémon Professor"/>
         </div>
-        <p className="text-sm mt-1 ml-2 font-bold">Ask me anything about Pokémon!</p>
+        <p className="text-sm mt-1 ml-2 font-bold">Your questions about Pokémon, answered!</p>
       </header>
 
       {/* Main Content */}

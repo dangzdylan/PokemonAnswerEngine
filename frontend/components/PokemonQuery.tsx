@@ -21,23 +21,51 @@ const PokemonQuery: React.FC = () => {
 
   const handleQuery = async (customQuery?: string) => {
     const activeQuery = customQuery || query;
+  
+    // Add the user's query to the history immediately
+    const tempMessageIndex = history.length;
+    setHistory((prev) => [
+      ...prev,
+      {
+        query: activeQuery,
+        response: "Thinking...", // Temporary response
+        retrievedData: [],
+        showCards: false,
+      },
+    ]);
+  
+    setQuery(""); // Clear the input box
+  
     try {
       setLoading(true);
       const data = await fetchPokemonData(activeQuery);
-
-      // Add query and response to history
-      setHistory((prev) => [
-        ...prev,
-        { query: activeQuery, response: data.response, retrievedData: data.retrieved_data, showCards: false},
-      ]);
-
-      setQuery(""); // Clear the input box
+  
+      // Update the history with the actual response
+      setHistory((prev) =>
+        prev.map((message, index) =>
+          index === tempMessageIndex
+            ? {
+                ...message,
+                response: data.response,
+                retrievedData: data.retrieved_data,
+              }
+            : message
+        )
+      );
     } catch (err) {
       console.error(err);
+      setHistory((prev) =>
+        prev.map((message, index) =>
+          index === tempMessageIndex
+            ? { ...message, response: "An error occurred. Please try again." }
+            : message
+        )
+      );
     } finally {
       setLoading(false);
     }
   };
+  
 
   function capitalize(word: string) {
     if (!word) return word;
@@ -136,7 +164,7 @@ const PokemonQuery: React.FC = () => {
                   className="font-bold py-2 px-4 bg-red-700 text-white rounded-lg hover:bg-red-400 transition ease-in-out duration-300"
                   onClick={() => toggleShowCards(index)}
                 >
-                  {message.showCards ? "Hide Pokémon Data" : "Show Pokémon Data"}
+                  {message.showCards ? "Hide Relevant Pokémon Data" : "Show Relevant Pokémon Data"}
                 </button>
                 {message.showCards && (
                   <div className="flex flex-wrap mt-2">
