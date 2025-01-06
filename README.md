@@ -1,24 +1,27 @@
-# **Pokémon Answer Engine**
-Welcome to the **Pokémon Answer Engine**, an answer engine that answers Pokémon-related queries and provides detailed Pokémon data.
+# **Project Title: Pokémon Answer Engine**
 
-**Features**
+Welcome to the Pokémon Answer Engine, otherwise known as AI Pokémon Professor, an answer engine using RAG that answers Pokémon-related queries and provides detailed Pokémon data.
 
-AI Chat: Ask Pokémon-related questions and get detailed answers.
+<ins>**Features:**</ins>
 
-Pokémon Cards: View relevant Pokémon details like abilities, stats, and descriptions.
+**Dynamic Pokémon Display**: Shows potentially relevant Pokémon based on the user’s query with detailed stats and descriptions.
 
-Learn More Button: Fetch detailed information for a specific Pokémon directly from its card.
+**Persistent Chat History**: Maintains a continuous conversation thread, displaying all previous queries and responses.
+
+**Interactive Pokémon Cards**: Users can toggle detailed Pokémon information and request additional insights with a single click.
+
+<ins>**Technologies Used:**</ins>
+
+**Frontend**: React with Next.js, Tailwind CSS
+
+**Backend**: Python with FastAPI, FAISS for Pokémon similarity search
+
+**Hosting**: Vercel (Frontend), Railway (Backend)
 
 
-**Technologies**
 
-Frontend: Typescript, React, Next.js, Tailwind CSS
 
-Backend: Python, FastAPI, OpenAI API, FAISS, PokéAPI
-
-Hosting: Vercel (Frontend), Railway (Backend)
-
-**Author**
+<ins>**Author:**</ins>
 
 Dylan Dang
 
