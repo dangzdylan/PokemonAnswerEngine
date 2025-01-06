@@ -63,7 +63,7 @@ const PokemonQuery: React.FC = () => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
-  }, [history.length]);
+  }, [history.length, loading]);
 
   return (
     <div className="flex flex-col h-full">
