@@ -28,7 +28,6 @@ def generate_response(context: str, query: str):
 
     # Add the context and query to the conversation
     conversation_history.append({"role": "user", "content": f"Context: {context}\nQuery: {query}"})
-    console.log(conversation_history)
 
     # Generate a response
     response = openai.ChatCompletion.create(
