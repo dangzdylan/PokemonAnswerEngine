@@ -164,7 +164,7 @@ const PokemonQuery: React.FC = () => {
                   className="font-bold py-2 px-4 bg-red-700 text-white rounded-lg hover:bg-red-400 transition ease-in-out duration-300"
                   onClick={() => toggleShowCards(index)}
                 >
-                  {message.showCards ? "Hide Relevant Pokémon Data" : "Show Relevant Pokémon Data"}
+                  {message.showCards ? "Hide Potentially Relevant Pokémon" : "Show Potentially Relevant Pokémon"}
                 </button>
                 {message.showCards && (
                   <div className="flex flex-wrap mt-2">
