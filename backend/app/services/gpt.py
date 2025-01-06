@@ -22,7 +22,8 @@ def generate_response(context: str, query: str):
     prompt = (
         f"Use the following Pokémon data to answer the query:\n\n"
         f"{context}\n\n"
-        f"Query: {query}\n\n"g Pokémon professor with detailed insights."
+        f"Query: {query}\n\n"
+        f"Answer as an expert Pokémon professor with detailed insights."
     )
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",  # Use "gpt-4" for more advanced responses if available
