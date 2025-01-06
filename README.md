@@ -1,6 +1,6 @@
-# **Project Title: Pokémon Answer Engine**
+# **AI Pokémon Professor**
 
-Welcome to the Pokémon Answer Engine, otherwise known as AI Pokémon Professor, an answer engine using RAG that answers Pokémon-related queries and provides detailed Pokémon data.
+Welcome to the AI Pokémon Professor, a RAG answer engine that answers Pokémon-related queries and provides detailed Pokémon data.
 
 <ins>**Features:**</ins>
 
